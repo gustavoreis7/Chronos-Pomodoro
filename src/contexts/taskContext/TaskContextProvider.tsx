@@ -16,29 +16,25 @@ export function TaskContextProvider({ children }: TaskContextProviderProps) {
    
     const worker = TimerWorkerManager.getInstance();
 
-    worker.onmessage((event) => {
-        const countDownSeconds = event.data;
+   worker.onmessage(e => {
+    const countDownSeconds = e.data;
 
-
-        if(countDownSeconds <= 0) {
-            if (playbeepRef.current) {
-                playbeepRef.current();
-                playbeepRef.current = null; // Reset the ref after playing the beep
-            }
-            dispatch({
-                type: TaskActionTypes.COMPLETE_TASK,
-            });
-            
-        } else {
-            dispatch({
-                type: TaskActionTypes.COUNT_DOWN,
-                payload: { secondsRemaining: countDownSeconds },
-            });
-        }
-
-    
-    
-});
+    if (countDownSeconds <= 0) {
+      if (playbeepRef.current) {
+        playbeepRef.current();
+        playbeepRef.current = null;
+      }
+      dispatch({
+        type: TaskActionTypes.COMPLETE_TASK,
+      });
+      worker.terminate();
+    } else {
+      dispatch({
+        type: TaskActionTypes.COUNT_DOWN,
+        payload: { secondsRemaining: countDownSeconds },
+      });
+    }
+  });
 
     useEffect(() => {
         if (!state.activeTask) {

@@ -36,15 +36,15 @@ export function Menu() {
 
     return (
     <nav className={styles.menu}>
-    <a className={styles.MenuLink} href="#" aria-label='Ir para a Home' title='ir para home'>
+    <a className={styles.MenuLink} href="/" aria-label='Ir para a Home' title='ir para home'>
             <HouseIcon/>
             
         </a>
-        <a className={styles.MenuLink} href="#" aria-label='Ir para o Histórico' title='ir para histórico'>
+        <a className={styles.MenuLink} href="/history" aria-label='Ir para o Histórico' title='ir para histórico'>
             <HistoryIcon />
             
         </a>
-        <a className={styles.MenuLink} href="#" aria-label='Ir para as Configurações' title='ir para configurações'>
+        <a className={styles.MenuLink} href="/settings" aria-label='Ir para as Configurações' title='ir para configurações'>
             <SettingsIcon />
             
         </a>
